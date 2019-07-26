@@ -1,7 +1,7 @@
 ## PCCA Verifier Java
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Known Vulnerabilities](https://snyk.io//test/github/ProofShow/PCCAVerifierJava/badge.svg?targetFile=PCCAVerifier/pom.xml)](https://snyk.io//test/github/ProofShow/PCCAVerifierJava?targetFile=PCCAVerifier/pom.xml)
-[![Build Status](https://travis-ci.com/ProofShow/PCCAVerifierJava.svg?branch=master)](https://travis-ci.com/ProofShow/PCCAVerifierJava)
+[![Known Vulnerabilities](https://snyk.io//test/github/ProofShow/PCCA-Verifier-Java/badge.svg?targetFile=PCCAVerifier/pom.xml)](https://snyk.io//test/github/ProofShow/PCCA-Verifier-Java?targetFile=PCCAVerifier/pom.xml)
+[![Build Status](https://travis-ci.com/ProofShow/PCCA-Verifier-Java.svg?branch=master)](https://travis-ci.com/ProofShow/PCCA-Verifier-Java)
 
 PCCA Verifier Java is a Java library for verifying Proof-Carrying Certificates™ issued by [PCCA](https://pcca.proof.show). The verification is done by
 
