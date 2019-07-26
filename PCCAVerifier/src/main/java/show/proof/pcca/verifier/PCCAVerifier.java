@@ -10,6 +10,7 @@ import java.util.Date;
 
 import show.proof.pcca.verifier.lib.PCCACertVerifier;
 import show.proof.pcca.verifier.lib.PCCAErrors;
+import show.proof.pcca.verifier.lib.PCCAVerifierReport;
 
 /**
  * Provides the interface for verifying Proof-Carrying Certificates issued by
@@ -21,10 +22,6 @@ public class PCCAVerifier {
      * the certificate verifier object.
      */
     private PCCACertVerifier certVerifier = null;
-    /**
-     * the x509 certificate object.
-     */
-    private X509Certificate signerCert = null;
 
     /**
      * Constructor for PCCAVerifier
@@ -41,41 +38,50 @@ public class PCCAVerifier {
     /**
      * Perform the verification procedure.
      * 
-     * @return the error code of verification.
+     * @return the report data of verification.
      */
-    public PCCAErrors verify() {
-        PCCAErrors result = certVerifier.verify();
+    public PCCAVerifierReport verify() {
+        PCCAVerifierReport report = new PCCAVerifierReport();
+        report.retCode = certVerifier.verify();
 
-        if (result == PCCAErrors.SUCCESS)
-            signerCert = certVerifier.getCertificate();
+        if (report.retCode == PCCAErrors.SUCCESS) {
+            X509Certificate cert = certVerifier.getCertificate();
 
-        return result;
+            report.certSubject = _getCertSubject(cert);
+            report.certKeyHash = _getCertKeyHash(cert);
+            report.certNotBefore = _getCertNotBefore(cert);
+            report.certNotAfter = _getCertNotAfter(cert);
+        }
+
+        return report;
     }
 
     /**
      * Get the certificate subject.
      * 
+     * @param cert the certificate to parse
      * @return the string of certificate subject.
      */
-    public String getCertSubject() {
-        if (signerCert == null)
+    private String _getCertSubject(X509Certificate cert) {
+        if (cert == null)
             return "";
         else {
-            return signerCert.getSubjectDN().getName().replaceAll("CN=", "");
+            return cert.getSubjectDN().getName().replaceAll("CN=", "");
         }
     }
 
     /**
      * Get the certificate key hash.
      * 
+     * @param cert the certificate to parse
      * @return the HEX string of certificate key hash.
      */
-    public String getCertKeyHash() {
-        if (signerCert == null)
+    private String _getCertKeyHash(X509Certificate cert) {
+        if (cert == null)
             return "";
         else {
             String result = "";
-            byte[] subjKeyIdBuf = signerCert.getExtensionValue("2.5.29.14");
+            byte[] subjKeyIdBuf = cert.getExtensionValue("2.5.29.14");
 
             // skip ASN1 structure
             subjKeyIdBuf = Arrays.copyOfRange(subjKeyIdBuf, 4, subjKeyIdBuf.length);
@@ -94,25 +100,27 @@ public class PCCAVerifier {
     /**
      * Get the not before date of certificate.
      * 
+     * @param cert the certificate to parse
      * @return a formatted date string.
      */
-    public String getCertNotBefore() {
-        if (signerCert == null)
+    private String _getCertNotBefore(X509Certificate cert) {
+        if (cert == null)
             return "";
         else
-            return _printFormatDate(signerCert.getNotBefore());
+            return _printFormatDate(cert.getNotBefore());
     }
 
     /**
      * Get the not after date of certificate.
      * 
+     * @param cert the certificate to parse
      * @return a formatted date string.
      */
-    public String getCertNotAfter() {
-        if (signerCert == null)
+    private String _getCertNotAfter(X509Certificate cert) {
+        if (cert == null)
             return "";
         else
-            return _printFormatDate(signerCert.getNotAfter());
+            return _printFormatDate(cert.getNotAfter());
     }
 
     /**
