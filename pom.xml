@@ -6,7 +6,7 @@
 
 	<groupId>show.proof.pcca</groupId>
 	<artifactId>verifier-java</artifactId>
-	<version>1.0.72413</version>
+	<version>1.0.72618</version>
 	<packaging>pom</packaging>
 
 	<name>PCCA Verifier Java</name>
