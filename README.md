@@ -27,7 +27,7 @@ To use this library, study the sample code in `PCCAVerifierExample` which can be
 
 ```
 mvn package
-java -jar PCCAVerifierExample/target/PCCAVerifierExample.jar PATH_OF_CERT
+java -jar PCCAVerifierExample/target/PCCAVerifierExample.jar INPUT_CERT_PATH
 ```
 
 ### License
