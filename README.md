@@ -19,7 +19,7 @@ For what it means by DKIM Proof of CSR, please refer to [PCCA Research Paper](ht
 To install this library in the local repository, run the following:
 
 ```
-mvn install -pl PCCAVerifier
+mvn install -pl '!PCCAVerifierExample'
 ```
 
 ### How to use
