@@ -16,7 +16,7 @@ For what it means by DKIM Proof of CSR, please refer to [PCCA Research Paper](ht
 - Maven
 
 ### How to install
-To install this library in the local repository, run the following:
+To install this library (without building the sample code) in the local repository, run the following:
 
 ```
 mvn install -pl '!PCCAVerifierExample'
